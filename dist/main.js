@@ -47,16 +47,18 @@ async function bootstrap() {
     const configService = app.get(config_1.ConfigService);
     const REDIS_HOST = configService.get('redis_host');
     const REDIS_PORT = configService.get('redis_port');
+    const REDIS_PW = configService.get('redis_password');
     const microserviceOptions = {
         transport: microservices_1.Transport.REDIS,
         options: {
-            url: `redis://${REDIS_HOST}:${REDIS_PORT}`,
+            host: REDIS_HOST,
+            port: REDIS_PORT,
+            auth_pass: REDIS_PW,
         },
     };
     app.connectMicroservice(microserviceOptions);
-    app.startAllMicroservices(() => {
-        console.log('MS 1 is listening ....');
-    });
+    await app.startAllMicroservices();
+    console.log('MS 1 is listening ....');
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
