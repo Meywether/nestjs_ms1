@@ -57,7 +57,7 @@ async function bootstrap() {
         },
     };
     app.connectMicroservice(microserviceOptions);
-    await app.startAllMicroservices();
+    app.startAllMicroservices();
     console.log('MS 1 is listening ....');
 }
 bootstrap();
